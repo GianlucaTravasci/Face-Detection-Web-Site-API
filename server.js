@@ -1,8 +1,11 @@
 const express = require('express');
+var cors = require('cors');
+const bcrypt = require('bcrypt-nodejs');
 
 const app = express();
 
 app.use(express.json()); //for parse the email
+app.use(cors());
 
 const database = {
     users: [
@@ -33,7 +36,7 @@ app.get('/', (req, res) => {
 
 app.post('/signin', (req, res) => {
     if (req.body.email === database.users[0].email && req.body.password === database.users[0].password) {
-        res.json('success');
+        res.json(database.users[0]);
     } else {
         res.status(400).json('error logging in')
     }
@@ -80,6 +83,7 @@ app.put('/image', (req, res) => {
         res.status(404).json('not found');
     }
 })
+
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
