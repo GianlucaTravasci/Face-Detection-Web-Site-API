@@ -25,7 +25,8 @@ app.use(express.json()); //for parse the email
 app.use(cors());
 
 
-const port = 3000;
+const portEnv = process.env.PORT;
+const portFail = 3000;
 
 app.get('/', (req, res) => {
     res.send(database.users);
@@ -52,6 +53,6 @@ app.post('/imageUrl', (req, res) => {
     image.handleApiCall(req, res);
 })
 
-app.listen(port, () => {
+app.listen(portEnv || portFail, () => {
     console.log(`Server running on http://localhost:${port}`);
 })
