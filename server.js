@@ -54,5 +54,5 @@ app.post('/imageUrl', (req, res) => {
 })
 
 app.listen(portEnv || portFail, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on http://localhost:${portEnv}`);
 })
