@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
+const morgan = require('morgan');
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -23,7 +24,7 @@ const app = express();
 
 app.use(express.json()); //for parse the email
 app.use(cors());
-
+app.use(morgan('combined'));
 
 const portEnv = process.env.PORT;
 const portFail = 3000;
