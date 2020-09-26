@@ -1,36 +1,31 @@
 version: "3.8"
 services:
+    #Postgres
+    database:
+        image: postgres
+        environment: 
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: Gianluca.96
+            POSTGRES_DB: facedetection
+            POSTGRES_HOST: postgres
+        build: ./postgres
+        ports: 
+            - "5432:5432"
+        
+
     #backend API 
     face-detection-api:
         container_name: backend
         build: ./
         command: npm start
         working_dir: /usr/src/face-detection-web-site-api
-        depends_on: 
+        environment: 
+            POSTGRES_URL: postgres://postgres:Gianluca.96@postgres:5432/facedetection
+        links:  
             - database
         ports:
             - "3000:3000" 
         volumes: 
             - ./:/usr/src/face-detection-web-site-api
 
-    #Postgres
-    database:
-        image: postgres
-        environment: 
-            POSTGRES_USER: admin
-            POSTGRES_PASSWORD: password 
-            POSTGRES_DB: facedetection
-        ports: 
-            - "5432:5432"
-        volumes: 
-            - ./db_data:/var/lib/postgresql/data
-            
-    #pgAdmin4
-    #pgAdmin4:
-    #    image: dpage/pgadmin4
-     #   environment: 
-      #      PGADMIN_DEFAULT_EMAIL: gianluca.travasci@gmail.com
-        #    PGADMIN_DEFAULT_PASSWORD: Gianluca.96
-       # ports:  
-       #     -  "8889:80"
-
+    
