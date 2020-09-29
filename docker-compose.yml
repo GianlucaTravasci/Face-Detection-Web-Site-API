@@ -12,7 +12,12 @@ services:
         build: ./postgres
         ports: 
             - "2345:5432"
-        
+    
+    #Redis
+    redis:
+        image: redis
+        ports: 
+            - "6379:6379"
 
     #backend API 
     face-detection-api:
@@ -22,8 +27,10 @@ services:
         working_dir: /usr/src/face-detection-web-site-api
         environment: 
             DB_URL: postgres://productioncoder:secret@postgres:5432/facedetection
+            REDIS_URL: redis://redis:6379
         depends_on: 
             - database
+            - redis
         ports:
             - "3000:3000" 
         volumes: 
