@@ -21,7 +21,7 @@ const handleProfileUpdate = (req, res, db) => {
         .update({ name })
         .then(resp => {
             if(resp) {
-                res.json('success')
+                res.status(200).json('success')
             } else {
                 res.status(400).json('Unable to update')
             }
