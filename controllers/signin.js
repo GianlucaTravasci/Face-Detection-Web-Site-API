@@ -14,7 +14,7 @@ const handleSignin = (db, bcrypt, req, res) => {
                 return db.select('*')
                     .from('users')
                     .where('email', '=', email)
-                    .then(user => user[0])
+                    .then(person => person[0])
                     .catch(err => Promise.reject('Unable to get user'))
             } else {
                 Promise.reject('Wrong credentials')
