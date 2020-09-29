@@ -21,7 +21,7 @@ services:
         command: npm start
         working_dir: /usr/src/face-detection-web-site-api
         environment: 
-            DB_URI: postgres://productioncoder:secret@postgres:5432/facedetection
+            DB_URL: postgres://productioncoder:secret@postgres:5432/facedetection
         depends_on: 
             - database
         ports:

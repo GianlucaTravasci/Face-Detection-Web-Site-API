@@ -13,7 +13,7 @@ const image = require('./controllers/image');
 const db = knex({
     client: 'pg',
     connection: {
-        connectionString: process.env.DB_URI,
+        connectionString: process.env.DB_URL,
         /*ssl: {
             rejectUnauthorized: false
           }
@@ -37,9 +37,7 @@ app.get('/', (req, res) => {
     res.send('it is working!');
 })
 
-app.post('/signin', (req, res) => {
-    signin.handleSignin(req, res, db, bcrypt);
-})
+app.post('/signin', signin.signinAuthentication(db, bcrypt))
 
 app.post('/register', (req, res) => {
     register.handleRegister(req, res, db, bcrypt);
